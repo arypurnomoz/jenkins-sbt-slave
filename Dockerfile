@@ -9,14 +9,16 @@ RUN apt-get install -y openssh-server
 RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd
 RUN mkdir -p /var/run/sshd
 
+
 # Install JDK 7 (latest edition)
 RUN apt-get install -y openjdk-8-jdk sbt 
+
+ADD https://dl.bintray.com/sbt/debian/sbt-0.13.7.deb /tmp/sbt.deb
+
 RUN \
   dpkg -i /tmp/sbt.deb \
   && rm /tmp/sbt.deb \
   && sbt clean
-
-ADD https://dl.bintray.com/sbt/debian/sbt-0.13.7.deb /tmp/sbt.deb
 
 # Add user jenkins to the image
 RUN adduser --quiet jenkins
