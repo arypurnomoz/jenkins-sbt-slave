@@ -11,10 +11,10 @@ RUN mkdir -p /var/run/sshd
 
 
 # Install JDK 7 (latest edition)
-RUN apt-get install -y openjdk-8-jdk sbt 
+RUN apt-get install -y openjdk-7-jdk
 
+# Install SBT
 ADD https://dl.bintray.com/sbt/debian/sbt-0.13.7.deb /tmp/sbt.deb
-
 RUN \
   dpkg -i /tmp/sbt.deb \
   && rm /tmp/sbt.deb \
